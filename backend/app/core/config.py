@@ -1,12 +1,11 @@
 from functools import lru_cache
-
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
     app_env: str = "development"
     cors_origins: str = "http://localhost:3000"
-    DATABASE_URL: str = "dealmemory.db"
+    DATABASE_URL: str = "data/dealmemory.db"
 
 
     model_config = SettingsConfigDict(
@@ -27,3 +26,5 @@ class Settings(BaseSettings):
 @lru_cache
 def get_settings() -> Settings:
     return Settings()
+
+settings = get_settings()

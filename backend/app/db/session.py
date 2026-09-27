@@ -2,12 +2,15 @@ from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, Asyn
 from backend.app.core.config import settings
 import os
 
-# Database URL for SQLite async
-DATABASE_URL = f"sqlite+aiosqlite:///{settings.DATABASE_URL}"
+# Create a fully qualified absolute path to the database file
+# This prevents "unable to open database file" errors on Windows
+base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+db_path = os.path.join(base_dir, settings.DATABASE_URL)
+DATABASE_URL = f"sqlite+aiosqlite:///{db_path}"
 
 engine = create_async_engine(
     DATABASE_URL,
-    echo=True,
+    echo=False,
     future=True
 )
 

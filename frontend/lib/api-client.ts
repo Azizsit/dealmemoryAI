@@ -1,6 +1,6 @@
 import { Deal as TDeal, Interaction as TInteraction, InteractionCreate as TInteractionCreate, BriefingResponse as TBriefingResponse } from '@/types';
 
-const API_BASE_URL = 'http://localhost:8000/api/v1';
+const API_BASE_URL = 'http://localhost:9000/api/v1';
 
 async function apiFetch<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
   const response = await fetch(`${API_BASE_URL}${endpoint}`, {

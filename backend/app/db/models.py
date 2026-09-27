@@ -14,7 +14,10 @@ class Deal(Base):
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     interactions = relationship("Interaction", back_populates="deal")
-    extractions = relationship("Extraction", back_populates="deal", secondary="interaction_extractions")
+    # Removed the problematic 'interaction_extractions' relationship.
+    # Extractions are already linked to Deals via a ForeignKey in the Extraction model.
+    # We can access them via a relationship to the Extraction class directly.
+    extractions = relationship("Extraction", back_populates="deal")
 
 class Interaction(Base):
     __tablename__ = "interactions"
